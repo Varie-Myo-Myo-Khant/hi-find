@@ -1,5 +1,11 @@
 # Hi-find
 
+In schools, colleges, and universities, students and staff frequently misplace personal items like books, bags, or electronic devices. 
+
+Hi-Find helps users by promptly returning the lost items to their owners, reducing disruptions to academic activities.
+Check the overview of the project here -->  https://www.canva.com/design/DAF66khYPGU/dlVmflVHB4A_TO2fMoHxbw/edit?utm_content=DAF66khYPGU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+
 ## Setup & Run Server
   - Clone the  project
   - Create the virtual environment for the django project in the clone folder using the following command
