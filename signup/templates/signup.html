@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{% static "images/login_background.svg" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+       }
+        .back-button {
+            position: absolute; /* Position it absolutely */
+            top: 20px; /* Adjust top position as needed */
+            right: 20px; /* Adjust right position as needed */
+            background-color: #1F1342;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .signup-container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            width: 75%;
+        }
+
+        .signup-title {
+            font-size: 26px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .inputS {
+            width: 50%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-bottom: 2px solid #1F1342;
+            outline: none;
+            margin-bottom: 20px; /* Add margin to create space between elements */
+            background-color: transparent;
+            transition: border-bottom 0.3s ease, transform 0.3s ease;
+        }
+
+        .inputS:focus {
+            transform: scale(1.02); /* Add a subtle scale effect on focus */
+        }
+        .selectG {
+            width: 52%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-bottom: 2px solid #1F1342;
+            outline: none;
+            margin-bottom: 20px;
+            background-color: transparent;
+            transition: border-bottom 0.3s ease, transform 0.3s ease;
+        }
+
+        .selectG:focus {
+            transform: scale(1.02);
+        }
+
+        .signup-button-container {
+            width: 50%;
+            margin: 0 auto; /* Center the button container */
+        }
+
+        .signup-button {
+            background-color: #1F1342;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        .signup-button:hover {
+            background-color: #CCCCCC;
+            color: #1F1342;
+        }
+
+        .signup-link {
+            font-size: 14px;
+        }
+
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #1F1342;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        
+
+    </style>
+</head>
+<body>
+
+
+    <a href="{% url 'index' %}"><button class="back-button">Back</button></a>
+        <div class="signup-container">
+        <div class="signup-title">Create an Account</div>
+        <form method="post">
+        {% csrf_token %}
+        <!-- Render each form field manually without the label -->
+        <div class="form-group">
+            {{ form.username }}
+        </div>
+        
+        <div class="form-group">
+            {{ form.email }}
+        </div>
+        
+        <div class="form-group">
+            {{ form.password }}
+        </div>
+
+        
+        <div class="form-group">
+            {{ form.gender }}
+        </div>
+        <div class="signup-button-container">
+        <button class="signup-button" type="submit">Sign Up</button>
+        </div>
+        </form>
+
+        <p class="signup-link">Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+    </div>
+</body>
+</html>

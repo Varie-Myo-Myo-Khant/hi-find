@@ -1,0 +1,4 @@
+**/__pycache__/
+socket/node_modules/*
+/myvirtual/*
+/media

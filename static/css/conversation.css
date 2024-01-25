@@ -1,0 +1,148 @@
+#message{
+    font-size: 40px;
+    color: #1f1342;
+    margin: 200px 200px;
+}
+.chatbot{
+    position: fixed;
+    width: 500px;
+    right: 10px;
+    top: 110px;
+    background: #1f1342;
+    border-radius: 10px;
+    transform: scale(0.5);
+    opacity: 0;
+    pointer-events: none;
+}
+.show-chatbot .chatbot{
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+    animation: fadeInRight 0.5s ease-in-out;
+}
+@keyframes fadeInRight{
+    from{
+        opacity: 0;
+        transform: translateX(300px);
+    }
+    to{
+        opacity: 1;
+    }
+}
+.row{
+    color: white;
+    margin-left: 20px;
+    height: 60px;
+}
+#item1{
+    margin-top: 20px;
+    width: 40px;
+    height: 40px;
+    margin-left: 20px;
+}
+#item2{
+    margin-top: 20px;
+    line-height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#item2 #chat-mate-name{
+    font-size: 20px;
+    font-weight: bold;
+}
+#item2 #p2{
+    font-size: 12px;
+    color: green;
+}
+
+#close-conversation {
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.center-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chatbot .chatbox{
+    height: 350px;
+    overflow: auto;
+    padding: 15px 20px 70px;
+}
+.chatbot .chatbox::-webkit-scrollbar{
+    display: none;
+}
+.chatbot .chat{
+    display: flex;
+}
+.chatbot .outcoming {
+    margin:15px 0;
+    justify-content: flex-end;
+}
+.chatbot .chat p{
+    color: #1f1342;
+    max-width: 70%;
+    font-size: 0.9em;
+    padding: 10px 13px;
+    border-radius: 0 10px 0 10px;
+    background: white;
+}
+.chatbot .incoming .msgimg{
+    width: 30px;
+    height: 30px;
+}
+.chatbot .incoming p{
+    border-radius: 10px 0 10px 0;
+    margin-left: 10px;
+}
+.chatbot .chat-input{
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    padding: 10px 20px;
+}
+.chat-input textarea{
+    border-radius: 2px;
+    margin-left: 20px;
+    width: 400px;
+    box-sizing: border-box;
+    border-radius: 7px;
+    font-size: 0.9em;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding: 10px 0 0 20px;
+    resize: none;
+}
+.chat-input textarea:focus{
+    left: 20px;
+}
+.chat-input textarea::-webkit-input-placeholder{
+    position: absolute;
+    left: 20px;
+    top: 10px;
+}
+.chat-input #send{
+    font-size: 20px;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+@media(max-width: 500px){
+    .chatbot{
+        right:0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+    .chatbot .chatbox{
+        height: 70%;
+    }
+}

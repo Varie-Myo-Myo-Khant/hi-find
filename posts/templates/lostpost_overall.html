@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+{% load custom_filters %}
+
+{% block title %} Lost Post Overall || {{ block.super }} {% endblock %}
+{% block content %}
+        <div style="width: 100%; display: flex; justify-content: center">
+            <form action="{% url 'Lost Post Overall' %}" method="get" id="search-container">
+                <input type="text" id="search-bar" name="q" placeholder="Type item keyword...">
+                <button type="submit" id="search-icon"><img src="{% static 'images/search.png'%}" alt="Search"></button>
+            </form>
+        </div>
+      
+    <div class="profiles">
+        {% if lost_items %}
+        {% for lost_item in lost_items %}
+        <div class="profile-card">
+            <div class="profile-details">
+                {% if lost_item.user.gender == 'M' %}
+                <img src="{% static 'images/boy.svg'%}" alt="User Profile Photo" class="profile-photo">       
+                {%endif%}
+                
+                {% if lost_item.user.gender == 'F' %}
+                <img src="{% static 'images/girl.svg'%}" alt="User Profile Photo" class="profile-photo">       
+                {%endif%}
+
+                <div class="profile-name">{{ lost_item.user.username }}</div>
+                <div class="profile-time">{{ lost_item.timestamp|custom_naturaltime }}</div>
+            </div>
+            <img src="{{ lost_item.fileUpload.url }}" alt="Lost Item Image" class="additional-image">
+            <ul class="list">
+                <li class="list-item"><b>Post title: </b>{{ lost_item.postTitle }}</li>
+                <li class="list-item"><b>Item: </b>{{ lost_item.lostItem }}</li>
+                <li class="list-item"><b>Location: </b>{{ lost_item.location }}</li>
+            </ul>
+            <!-- post_id=lost_item.post_id  -->
+            <div id="detailBtndiv">
+            <a href="{% url 'Lost Post Detail' post_id=lost_item.post_id %}"><button class="details-button">Detail</button></a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <img src="{% static 'images/404.svg'%}" alt="error" id="error">
+        {% endif %}
+    </div>
+
+
+
+{% endblock %}
+

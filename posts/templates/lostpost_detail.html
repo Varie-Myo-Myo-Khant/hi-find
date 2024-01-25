@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+{% load custom_filters %}
+{% block title %} Lost Post Detail || {{ block.super }} {% endblock %}
+
+{% block content %}
+
+
+    
+    <!-- Detail Information -->
+    <div style="padding:100px 0px; padding-left: 35%;background: white;">
+
+    <div style="width: 450px;display: flex;flex-direction: column;align-items: flex-start;row-gap: 10px;">
+    <div style="width: 100%;">
+        <!-- for post title -->
+        <div name="title" style="font-family:'Bebas Neue' ;font-size: 34px;color:#1F1342;display: flex; align-items: center; justify-content: center; width: 100%;" id="title"> 
+            <h3>{{current_post.postTitle}}</h3>
+
+        <!-- for chat-icon -->
+        <span><button style="border: none;background-color: transparent;" id="post-detail-chat-trigger">
+            <img src="{% static 'images/converation.png'%}" width="40" height="40" style="margin-left: 240px;"></button></span> 
+        </div> 
+    </div>
+    <div>
+    <!-- for user name -->
+    {% if current_post.user.gender == 'M' %}
+    <img src="{% static 'images/boy.svg'%}" width="26" height="26" style="border-radius: 30px;">     
+    {%endif%}
+   
+    {% if current_post.user.gender == 'F' %}
+    <img src="{% static 'images/girl.svg'%}" width="26" height="26" style="border-radius: 30px;">     
+    {%endif%}
+
+    &nbsp;&nbsp;<span style="font-family: 'Bebas Neue';font-size: 18px;margin-top: 5px;color:#1F1342;" id="username">{{current_post.user.username}}</span> 
+    
+    <!-- for post created time -->
+    <span class="text-muted" style="margin-left: 30px;" id="time">{{ current_post.timestamp | custom_naturaltime }}</span>
+     </div>   
+    
+    <!-- for uploaded image -->
+    <img src="{{ current_post.fileUpload.url }}" id="upload_img" style="border-radius: 10px;object-fit:contain;border: 1px solid #cab6b68f;" width="450" height="250">
+    
+    <div>
+        <span style="font-family: 'Bebas Neue';font-size: 20px;color:#1F1342;">Status :</span> 
+        <span class="" style="font-size: 18px;color: #02f016;"> Active</span>
+    </div>
+    <hr style="width: 450px;margin: 0;">
+    <div>
+        <span style="font-family: 'Bebas Neue';font-size: 20px;color:#1F1342;">Location :</span> 
+        <span class="text-muted" style="font-size: 18px;"> {{current_post.location}}</span>
+        
+    </div>
+    <hr style="width: 450px;margin: 0;">
+    <div>
+        <span style="font-family: 'Bebas Neue';font-size: 20px;color:#1F1342;">Description :</span> 
+        <span class="text-muted" style="font-size: 18px;line-height:normal;text-align:justify;"> {{current_post.description}}</span>
+    </div>
+    
+    <a href="{% url 'Lost Post Overall' %}">
+    <button type="button" style="margin-left: 8px;color: #ffffff;background-color: #1F1342;margin-top:10px;width: 400px;height:40;font-family: 'Bebas Neue';border-radius: 2rem;font-size: 24px;">Back</button>
+    </a>
+
+    </div>
+    </div>
+
+    <script type="module">
+        import { openConversation } from "{% static 'scripts/chat.js' %}";
+
+        $("#post-detail-chat-trigger").on('click', async () => {
+            await openConversation("{{ post_user.pk }}", "{{ post_user.username }}")
+        });
+
+        if("{{ post_user.pk }}" == "{{ user.pk }}") {
+            $("#post-detail-chat-trigger").hide();
+        }
+    </script>
+
+{% endblock %}
+
+    
+   

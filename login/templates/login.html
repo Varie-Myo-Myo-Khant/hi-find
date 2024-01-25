@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{% static "images/login_background.svg" %}'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative; 
+        }
+
+        .back-button {
+            position: absolute; /* Position it absolutely */
+            /* top: 20px; Adjust top position as needed */
+            right: 20px; /* Adjust right position as needed */
+            background-color: #1F1342;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-top: 20px;
+        }
+
+        .login-container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            width: 40%;
+            margin-top: 160px;
+        }
+
+        .login-title {
+            font-size: 26px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .inputS {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-bottom: 2px solid #1F1342;
+            outline: none;
+            margin-bottom: 20px; /* Add margin to create space between elements */
+            background-color: transparent;
+            transition: border-bottom 0.3s ease, transform 0.3s ease;
+        }
+
+        .inputS:focus {
+            transform: scale(1.02); /* Add a subtle scale effect on focus */
+        }
+
+        .login-button-container {
+            width: 60%;
+            margin: 0 auto; /* Center the button container */
+        }
+
+        .login-button {
+            background-color: #1F1342;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px; 
+            display: block; 
+            width: 100%;
+            font-size: 18px;
+        }
+
+        .login-button:hover {
+            background-color: #CCCCCC;
+            color:#1F1342;
+
+        }
+
+        .signup-link {
+            font-size: 14px;
+        }
+
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #1F1342;
+        }
+        a:hover
+        {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    {% if messages %}
+                 <div class="messages">
+                    {% for message in messages %}
+                    <div {% if message.tags %} class="{{ message.tags }}" {% endif %} style="text-align: center;"> <strong>{{ message }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </div>
+                    {% endfor %}
+                </div>
+   
+    {% endif %}
+    <div style="display: flex;flex-direction: column;align-items: center;">
+           
+    <a href="{% url 'index' %}"><button class="back-button">Back</button></a>
+
+    <div class="login-container">
+        <div class="login-title">Login to your account</div>
+        <form method="post">
+             {% csrf_token %}
+             <div class="form-group">
+            {{ form.username }}
+            </div>
+        
+            <div class="form-group">
+                {{ form.password }}
+            </div>
+            <div class="login-button-container">
+                <button class="login-button">Login</button>
+            </div>
+        </form>
+        <p class="signup-link">Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+    </div>
+   
+     </div>
+</body>
+</html>

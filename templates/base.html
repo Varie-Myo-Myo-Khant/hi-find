@@ -1,0 +1,556 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Bebas Neue' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- for post detail style */ -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{% static 'css/popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chat-list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/conversation.css' %}">
+    <title>{% block title %} Lost Portal {% endblock title %}</title>
+    <style type="text/css">
+
+        body{
+            background-color: #E8E8E8;
+        }
+       
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+            text-decoration: none;
+           
+        }
+
+        .hero {
+            width: 100%;
+            background-color: #E8E8E8;
+            color: #525252;
+        }
+
+        nav {
+            background-color: transparent;
+            width: 100%;
+            padding: 30px 10% 50px 10%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .logo {
+            width: 120px;
+            font-family:'Bebas Neue'; 
+            font-size: 40px;
+        }
+
+        h2 {
+            color: #1F1342;
+        }
+
+        
+        .create-post{
+            margin-left: 50px;
+
+        }
+
+        .create-post button {
+            background-color: #1F1342;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .create-post button a{
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            padding: 10px 10px;
+        }
+
+        .create-post #create-icon {
+            width: 20px; /* Adjust the width as needed */
+            height: 20px;
+            margin-top: 7px; /* Adjust the height as needed */
+            margin-right: 10px;
+            color: #fff;
+            /* Adjust the margin as needed */
+        }
+
+        .chat-icon
+        {
+            font-size: 30px;
+            margin-left: 30px;
+            color: #1F1342;
+            cursor: pointer;
+            position: relative;
+        }
+        .chat-icon:active {
+            opacity: .7;
+        }
+        .noti-badge {
+            display: none;
+            position: absolute;
+            top: 0px;
+            right: 0;
+            background-color: #dc3545;
+            width: 10px;
+            height: 10px;
+            border-radius: 100%;
+            color: white;
+        }
+        .user-pic {
+            width: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-left: 30px;
+        }
+        .sub-menu-wrap {
+            position: absolute;
+            top: 60%;
+            right: 1%;
+            max-height: 0px;
+            overflow: hidden;
+            transition: max-height 0.5s;
+
+        }
+
+        .sub-menu-wrap.open-menu {
+            max-height: 300px;
+        }
+
+        .sub-menu {
+            background-color: #1F1342;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 25px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info > * {
+            margin: 0;
+        }
+
+        .user-info h3 {
+            color: #E8E8E8;
+        }
+
+        .user-info img {
+            width: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .sub-menu hr {
+            border: 0;
+            height: 1px;
+            width: 100%;
+            background-color: #ccc;
+            margin: 15px 0 10px;
+        }
+
+        .sub-menu-link {
+            display: flex;
+            align-items: flex-start;
+            text-decoration: none;
+            color: #525252;
+            margin: 10px 0;
+        }
+
+        .sub-menu-link p {
+            width: 100%;
+            color: #E8E8E8;
+        }
+
+        .sub-menu-link img {
+            width: 30px;
+            background-color: #e5e5e5;
+            border-radius: 50%;
+            padding: 8px;
+            margin-right: 15px;
+        }
+
+        .sub-menu-link span {
+            font-size: 15px;
+            transition: transform 0.5s;
+            color: #E8E8E8;
+        }
+
+        .sub-menu-link:hover span {
+            transform: translate(5px);
+        }
+
+        .sub-menu-link:hover p {
+            font-weight: 600;
+        }
+        
+        .profiles {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+                    margin: 50px 160px 100px;
+                    flex-direction: row;
+                    row-gap: 50px;
+                    column-gap: 30px;
+        }
+
+        .profile-card {
+            width: 270px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: left;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            
+        }
+
+        .profile-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .profile-details {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 5px;
+            width: 100px;
+        }
+        .profile-name2{
+                margin: 10px 0px;
+                font-size: 20px;
+                font-weight: bold;
+                width: 100%;
+        }
+        .profile-time {
+            font-size: 12px;
+            color: #777;
+            margin-left: 20px;
+        }
+        .profile-time2 {
+            font-size: 12px;
+            color: #777;
+        }
+        .additional-image {
+            width: 230px;
+            height: 150px;
+            margin-top: 10px;
+            padding: 0;
+            border-radius: 20px;
+            object-fit: contain;
+        }
+
+        .list {
+            list-style-type: none;
+            margin-top: 10px;
+            padding-left: 0;
+        }
+
+        .list-item {
+            margin-bottom: 5px;
+        }
+
+        #detailBtndiv{         
+        width: 220px;
+        display: flex;
+        justify-content: center;
+        }
+
+        .details-button {
+            background-color: #1F1342;
+            border: none;
+            color: #fff;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            padding: 10px 30px;
+        }
+
+        .details-button a{
+            text-decoration: none;
+            color: #fff;
+             font-size: 14px;
+        }
+
+        footer{
+        background-color: #1F1342;
+        color: #ffffff;
+        text-align: center;
+        font-size: 14px;
+        font-family: 'Bebas Neue';
+        padding: 20px;
+        }
+
+        #rightnav{
+            display: flex;
+            justify-content: space-between;
+            align-content: center;
+            column-gap: 10px;
+            flex-direction: row;
+            }
+
+         /*for create post css*/
+            textarea{
+            resize: none;
+            }
+
+            input::selection{
+            /* border-color: #1F1342; */
+            border: #1F1342 2px solid;
+            }
+
+            #search-container {
+                display: flex;
+                align-items: center;
+                align-content: center;
+                width: 400px;
+                padding: 10px 15px;
+                border: 2px solid #1F1342;
+                border-radius: 30px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s;
+            }
+
+            /* Style for the search bar input */
+            #search-bar {
+                border: none;
+                outline: none;
+                font-size: 16px;
+                background-color: transparent;
+                flex-grow: 100;
+            }
+
+            /* Style for the search bar input when focused */
+            #search-container:focus-within {
+                background-color: #fff;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                outline: none;
+            }
+
+            /* Style for the search icon */
+            #search-icon {
+                color: #555;
+                cursor: pointer;
+                border-width: 0px;
+                background-color: transparent;
+            }
+
+            /* Add a placeholder style */
+            #search-bar::placeholder {
+                color: #999;
+            }
+
+            /* Style for the search icon hover effect */
+            #search-icon:hover {
+                transform: scale(1.20);
+            }
+
+            #search-icon img {
+                width: 24px; /* Adjust the width as needed */
+                height: 24px; /* Adjust the height as needed */
+                display: block; /* Ensures the image is displayed as a block element */
+                margin: 0 auto; /* Centers the image horizontally within the container */
+            }
+        
+            /* for user_posts css*/
+        
+            .details{
+            display: flex;
+                flex-direction: row;
+        }
+        .details-button1{
+            background-color: #1F1342;
+            border: none;
+            color: #fff;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+        .details-button1 a{
+            text-decoration: none;
+            color: #fff;
+             font-size: 14px;
+
+        }
+        .details-button2{
+            background-color: transparent;
+            border: none;
+            border:1px solid #1F1342;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+        .details-button2 a{
+            text-decoration: none;
+            color: #1F1342;
+             font-size: 14px;
+
+        }
+
+        i.fa-solid.fa-arrow-left {
+            margin: 0px 130px;
+        }
+
+        /* 404 image */
+        #error{
+            width: 500px;
+
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* for delete confirmation */
+        .modal-content{
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                /* width: 100%; */
+                color: white;
+                pointer-events: auto;
+                background-color: #1F1342;
+                background-clip: padding-box;
+                border-radius: 0px;
+                outline: 0;
+                align-items: center;
+                padding: 30px;
+        }
+    </style>
+</head>
+<body>
+     {% if messages %}
+                 <div class="messages">
+                    {% for message in messages %}
+                    <div {% if message.tags %} class="{{ message.tags }}" {% endif %} style="text-align: center;"> <strong>{{ message }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </div>
+                    {% endfor %}
+                </div>
+   
+    {% endif %}
+<div class="hero">
+    <nav>
+        <div>
+            <a href="{% url 'Lost Post Overall' %}" style="text-decoration: none;"><h2 class="logo">HI-FIND</h2></a>
+        </div>
+        
+        <div id="rightnav">
+            <div class="create-post">
+            <button><a href="{% url 'Create Post' %}">
+                Create a Post</a>
+                <i class="fa-regular fa-pen-to-square" id="create-icon"></i>
+            </button>
+            </div>
+            <div class="chat-icon" id="nav-chat-trigger">
+             <i class="fa-solid fa-comment-dots"></i>
+             <div class="noti-badge" id="chat-noti"></div>
+            </div>
+            {% if user.gender == 'M' %}
+            <img src="{% static 'images/boy.svg'%}" class="user-pic" onclick="toggleMenu()">
+            {%endif%}
+            {% if user.gender == 'F' %}
+            <img src="{% static 'images/girl.svg'%}" class="user-pic" onclick="toggleMenu()">
+            {%endif%}
+            <div class="sub-menu-wrap" id="subMenu">
+                <div class="sub-menu">
+                    <div class="user-info">
+                        {% if user.gender == 'M' %}
+                        <img src="{% static 'images/boy.svg'%}">
+                        {%endif%}
+                        {% if user.gender == 'F' %}
+                        <img src="{% static 'images/girl.svg'%}">
+                        {%endif%}
+                        <h4 style="color: white">{{ user.username }}</h4>
+                    </div>
+                    <hr>
+                    <a href="{% url 'User Posts' %}" class="sub-menu-link">
+                        <img src="{% static 'images/profile.png'%}">
+                        <p>Your Posts</p>
+                        
+                    </a>
+                    
+                    <a href="{% url 'index' %}" class="sub-menu-link">
+                        <img src="{% static 'images/logout.png'%}">
+                        <p>Logout</p>
+                    </a>
+                </div>
+            </div>
+        </div>   
+    </nav>
+
+</div>
+
+{% include "chat-list.html" %}
+{% include "conversation.html" %}
+<div style="min-height: 100vh;">
+{% block content %}
+
+
+
+{% endblock content %}
+</div>
+<!-- Script -->
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script src="{% static 'scripts/jquery.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.1/moment.min.js" integrity="sha512-Ti+qWaQIPJpZmOpv8ze0P41zpwahjzcqKzFwJdDNbDwvYRpeb//bnVhXK03o/9cuPemGm2wyVsSfXnMUebU60g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'scripts/socket.js' %}" type="module"></script>
+
+<script type="module">
+    import { register } from "{% static 'scripts/socket.js' %}";
+    import { openChatList } from "{% static 'scripts/chat.js' %}";
+
+    (function() {
+        register("{{ user.pk }}");
+        $("#nav-chat-trigger").on('click', async () => {
+            await openChatList();
+        });
+    })();
+</script>
+
+<script>
+    let subMenu = document.getElementById("subMenu");
+    function toggleMenu() {
+        subMenu.classList.toggle("open-menu");
+    }
+</script>
+
+</body>
+
+<footer>&copy;2023.HI-FIND.All rights reserved.&reg;</footer>
+
+</html>

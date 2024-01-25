@@ -1,0 +1,38 @@
+{% load static %}
+
+<div class="conversation">
+    <div class="chatbot" data-toggle="animation"  data-animation-reset="true" data-animation="slide-left">
+        <div class="row mx-lg-1">
+            <div class="col-md-2">
+                <img src="/static/images/user.jpg" alt="image" id="item1">
+            </div>
+            <div class="col-md-8" id="item2">
+                <span id="chat-mate-name">Alice</span>
+                <span id="p2"><i class="fa-solid fa-circle" style="font-size: 10px;"></i>  Active</span>
+            </div>
+            <div class="col-md-2 center-block">
+                <i class="fa-regular fa-circle-xmark" id="close-conversation"></i>
+            </div>
+        </div>
+        
+        <hr style="color: white;">
+        <ul class="chatbox" id="message-list">
+            <!-- <li class="chat incoming">
+                <img src="image.png" alt="image" id="msgimg">
+                <p>How are you?</p>
+            </li>
+            <li class="chat outcoming">
+                <p>I'm fine.Thank You.</p>
+            </li> -->
+        </ul>
+        <div class="chat-input">
+            <textarea placeholder="Type a message..." id="message-box"></textarea>
+            <i class="fa-regular fa-paper-plane" id="send"></i>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { closeConversation } from '{% static 'scripts/chat.js' %}';
+    $("#close-conversation").on('click', closeConversation);
+</script>

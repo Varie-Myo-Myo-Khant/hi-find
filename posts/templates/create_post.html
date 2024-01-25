@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Lost Create Form || {{ block.super }} {% endblock %}
+
+{% block content %}
+<div style="background-image: url('{% static "images/report_bg.svg" %}'); background-size:cover; background-repeat:no-repeat; padding: 20px 0px 50px 0px;" >
+       
+  <div class="col mt-4" >
+  <div class="container  " style="width: 620px; " >
+
+          <div class="card shadow shadow-sm " style="border-radius:20px;height:650px;">
+          <span class="" style="margin-top:10px;font-weight: bold;font-size: 29px;color: #1F1342;text-align:center;font-family: 'Bebas Neue';">Report an item</span>
+      
+      
+      <!-- MAIN -->
+          <form class="needs-validation"  method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+              <div class="card-body p-4"  style="line-height: 16px;">
+              
+              <!-- <label for="validationCustom03" class="form-label">Status</label> -->
+              <span style="font-size: 16px; color: #1F1342; ">Title</span>     
+              <div class="form-group">
+              {{ form.postTitle }}
+              </div>
+              <div class="invalid-feedback align-bottom  ">
+              Please fill status.
+             </div>   
+              <br>
+
+              <span style="font-size: 16px; color: #1F1342; ">Item</span>        
+              <div class="form-group">
+              {{ form.lostItem }}
+              </div>
+              <div class="invalid-feedback">
+                    Please fill item.
+              </div>
+              <br>
+
+              <span style="font-size: 16px; color: #1F1342; ">Location</span>        
+               <div class="form-group">
+              {{ form.location }}
+              </div>
+              <div class="invalid-feedback mt-1 ">
+                    Please fill location.
+              </div>
+              <br>
+
+              <span style="font-size: 16px; color: #1F1342; ">Description</span>    
+              <div class="form-group">
+              {{ form.description }}
+              </div>
+              <br>
+
+              <!-- show the uploaded image -->
+               {% if form.initial.fileUpload %}
+              <div style="margin-bottom: 10px;">   
+              <span style="font-size: 16px; color: #1F1342; ">Uploaded image :</span> <img src="{{ form.initial.fileUpload.url }}" alt="Image" style="height: 30px;">
+              </div>
+              {% endif %}
+              <div class="file-loading">
+              <div class="form-group">
+              {{ form.fileUpload }}
+              </div>
+              
+              <div class="invalid-feedback mt-1 ">
+                    Please upload an image.
+              </div>
+              </div>
+              <br><br>
+              
+              <a href="{% url 'Lost Post Overall' %}" style="margin-left: 360px;color: #1F1342;font-size: 22px; font-family: 'Bebas Neue';text-decoration: none;" >Cancel </a>
+              &nbsp;&nbsp;&nbsp;  
+              <button style="background-color: #1F1342;color: #ffffff;font-size: 22px;border-radius: 2rem;width:100px;height: 34px; font-family: 'Bebas Neue';" type="submit"  >Submit </button> 
+                 
+              </div>
+          </form>
+    
+        </div>
+
+    </div>
+
+  </div>
+   
+</div>
+
+<script>
+
+// //  for disabling form submissions if there are invalid fields
+//     (function () {
+//       'use strict'
+    
+//       // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//       var forms = document.querySelectorAll('.needs-validation')
+    
+//       // Loop over them and prevent submission
+//       Array.prototype.slice.call(forms)
+//         .forEach(function (form) {
+//           form.addEventListener('submit', function (event) {
+//             if (!form.checkValidity()) {
+//               event.preventDefault()
+//               event.stopPropagation()
+//             }
+    
+//             form.classList.add('was-validated')
+//           }, false)
+//         })
+//     })()</script>
+
+ {% endblock %}
+  

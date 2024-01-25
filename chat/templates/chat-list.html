@@ -1,0 +1,42 @@
+{% load static %}
+
+<div class="popup-container" id="chat-popup">
+    <div class="right-align-popup">
+        <div class="chat_container" id="chat_container">
+            <div class="incontainer" >
+
+                <!-- Header -->
+                <div class="header">
+                    <div class="chat_title">
+                        <h3>CHATS</h3>
+                    </div>
+                    <i class="fa-regular fa-circle-xmark" style="color: white; font-size: 25px; cursor: pointer;" id="close-chat-list"></i>
+                </div>
+
+                <!-- CHAT LIST -->
+                <ul class="chatlist" id="chat_list">
+
+                    {% comment %} <li class="block">
+                        <div class="imgBox">
+                            <img src="{% static 'images/user.jpg' %}" class="cover" alt="">
+                        </div>
+                        <div class="chat-list-details">
+                            <div class="listHead">
+                                <h4>Jhon Doe</h4>
+                                <p class="time">10:56</p>
+                            </div>
+                            <div class="message_p">
+                                <p>How are you doing?</p>
+                            </div>
+                        </div>
+                    </li> {% endcomment %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { closeChatList } from '{% static 'scripts/chat.js' %}';
+    $("#close-chat-list").on('click', closeChatList);
+</script>

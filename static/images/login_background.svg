@@ -1,0 +1,38 @@
+<svg width="1512" height="982" viewBox="0 0 1512 982" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_405_27)">
+<rect width="1512" height="982" fill="#E8E8E8"/>
+<g opacity="0.77">
+<circle cx="43" cy="43" r="42.5" transform="matrix(-1 0 0 1 196 747)" stroke="#121212" stroke-opacity="0.66"/>
+<rect width="48" height="10" transform="matrix(-1 0 0 1 147 790)" fill="#121212"/>
+</g>
+<g opacity="0.77">
+<circle cx="43" cy="43" r="42.5" transform="matrix(-1 0 0 1 1462 607)" stroke="#121212" stroke-opacity="0.66"/>
+<rect width="48" height="10" transform="matrix(-1 0 0 1 1413 650)" fill="#121212"/>
+</g>
+<g opacity="0.77">
+<circle cx="43" cy="43" r="42.5" transform="matrix(-1 0 0 1 858 22)" stroke="#121212" stroke-opacity="0.66"/>
+<rect width="48" height="10" transform="matrix(-1 0 0 1 809 65)" fill="#121212"/>
+</g>
+<g opacity="0.77">
+<circle cx="1464.16" cy="195.835" r="20.3351" transform="rotate(180 1464.16 195.835)" stroke="#121212" stroke-opacity="0.66"/>
+<rect x="1461.26" y="195.835" width="23.2577" height="4.84536" transform="rotate(180 1461.26 195.835)" fill="#121212"/>
+</g>
+<g opacity="0.77">
+<circle cx="813.165" cy="870.835" r="20.3351" transform="rotate(180 813.165 870.835)" stroke="#121212" stroke-opacity="0.66"/>
+<rect x="810.258" y="870.835" width="23.2577" height="4.84536" transform="rotate(180 810.258 870.835)" fill="#121212"/>
+</g>
+<g opacity="0.77">
+<circle cx="20.8351" cy="20.8351" r="20.3351" transform="matrix(-1 0 0 1 146 44)" stroke="#121212" stroke-opacity="0.66"/>
+<rect width="23.2577" height="4.84536" transform="matrix(-1 0 0 1 122.258 64.8351)" fill="#121212"/>
+</g>
+<rect opacity="0.66" width="6" height="514" rx="3" transform="matrix(-1 0 0 1 1305 596)" fill="#121212"/>
+<rect opacity="0.66" width="6" height="514" rx="3" transform="matrix(-1 0 0 1 301 543)" fill="#121212"/>
+<rect opacity="0.66" width="6" height="514" rx="3" transform="matrix(-1 0 0 1 1017 -359)" fill="#121212"/>
+<rect opacity="0.66" width="6" height="514" rx="3" transform="matrix(-1 0 0 1 24 -102)" fill="#121212"/>
+</g>
+<defs>
+<clipPath id="clip0_405_27">
+<rect width="1512" height="982" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Your Posts || {{ block.super }} {% endblock %}   
+{% block content %}
+
+    <a href="{% url 'Lost Post Overall' %}" style="color: #1F1342;"><i class="fa-solid fa-arrow-left" style="font-size: 30px;"></i></a>
+    <div class="profiles">
+        {% if current_user_posts %}
+        {% for current_user_post in current_user_posts %}
+        <div class="profile-card">
+            <div style="display: flex; flex-direction: column;">
+                <div class="profile-name2">{{ current_user_post.postTitle }}</div>
+                <div class="profile-time2">{{ current_user_post.timestamp}}</div>
+            </div>
+            
+            <img src="{{ current_user_post.fileUpload.url }}" alt="Lost Item Image" class="additional-image">
+            <ul class="list">
+                <li class="list-item"><b>Location: </b>{{ current_user_post.location }}</li>
+                <li class="list-item"><b>Description: </b>{{ current_user_post.description }}</li>
+            </ul>
+
+            <div class="details">
+            <button class="details-button1"><a href="{% url 'Edit Post' post_id=current_user_post.post_id %}">EDIT</a></button>
+            <button class="details-button2 delete-button" data-post-id="{{ current_user_post.post_id }}">DELETE</button>
+        </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <img src="{% static 'images/404.svg'%}" alt="error" id="error">
+        {% endif %}
+    </div>
+
+<!-- Delete confirmation modal -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            
+            <h2 style="color: white;">Delete Confirmation!</h2>
+            <p>Are you sure you want to delete this post?</p>
+            <form method="post" id="deleteForm">
+                {% csrf_token %}
+                <button type="submit" style="padding: 5px;border-radius: 20px;width: 100px;color: #1F1342;" >Yes, delete</button>
+                <button type="button" id="cancelDelete" style="padding: 5px;border-radius: 20px;width: 100px;color: #1F1342;">Cancel</button>
+            </form>
+        </div>
+    </div>
+<script>
+
+    // JavaScript to show/hide the delete confirmation modal
+    const deleteButtons = document.querySelectorAll('.delete-button');
+    const deleteModal = document.getElementById('deleteModal');
+    const cancelDelete = document.getElementById('cancelDelete');
+    const deleteForm = document.getElementById('deleteForm');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const postId = button.getAttribute('data-post-id');
+            deleteForm.action = `{% url 'Delete Post' 0 %}`.replace('0', postId);  // Set the form action dynamically
+            deleteModal.style.display = 'block';
+        });
+    });
+
+    cancelDelete.addEventListener('click', () => {
+        deleteModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === deleteModal) {
+            deleteModal.style.display = 'none';
+        }
+    });
+</script>
+
+{% endblock %}
